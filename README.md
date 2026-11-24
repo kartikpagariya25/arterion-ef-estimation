@@ -10,7 +10,7 @@ Part of the [Arterion](https://github.com/kartikpagariya25/Arterion) project.
 
 ## How it works
 
-An **R(2+1)D-18** video network (Kinetics-pretrained, 31.3 M parameters) regresses EF from a 32-frame, 112×112 clip. At inference the backend scores up to **three contiguous windows** spread across the video and reports their mean; the spread between windows is shown as a stability indicator (it is not a calibrated confidence interval). Videos are resized to 112×112; short videos are padded with their last frame.
+An **R(2+1)D-18** video network (Kinetics-pretrained, 31.3 M parameters) regresses EF from a 32-frame, 112×112 clip built from **every 2nd frame** (a window spans 63 frames, roughly one full heartbeat). At inference the backend scores up to **three windows** spread across the video and reports their mean; the spread between windows is shown as a stability indicator (it is not a calibrated confidence interval). Videos are resized to 112×112; short videos are padded with their last frame.
 
 EF bands: ≥ 55 % normal · 45–54 % mildly reduced · 30–44 % moderately reduced · < 30 % severely reduced.
 
@@ -18,9 +18,9 @@ EF bands: ≥ 55 % normal · 45–54 % mildly reduced · 30–44 % moderately re
 
 | MAE | RMSE | R² |
 |---|---|---|
-| 5.13 EF points | 6.95 | 0.676 |
+| **4.61 EF points** | 6.25 | **0.739** |
 
-These are single-centre results from one centre's videos using the centre window of each video. The project's aim was R² ≥ 0.75 / MAE ≤ 5; MAE is close, R² is not there yet. Numbers in `training/artifacts/metrics.json` always match the published weights.
+Same protocol as the app: every 2nd frame, mean of 3 windows (single centre window: MAE 4.72). The previous release (v1.0.0, consecutive frames, centre window) scored MAE 5.13 / R² 0.676; this model was fine-tuned from it. These are single-centre results. The project's aim was R² ≥ 0.75 / MAE ≤ 5: MAE is met, R² is just short. `training/artifacts/metrics.json` always matches the published weights.
 
 ## Run it
 

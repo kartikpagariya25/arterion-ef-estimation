@@ -93,3 +93,19 @@ def test_classification_bands():
     assert [m.classify_ef(x) for x in (70, 55, 54.9, 45, 44.9, 30, 29.9)] == [
         "normal", "normal", "mildly_reduced", "mildly_reduced",
         "moderately_reduced", "moderately_reduced", "severely_reduced"]
+
+
+def test_clip_samples_every_second_frame():
+    video = np.zeros((200, 112, 112, 3), dtype=np.uint8)
+    video[:, 0, 0, 0] = np.arange(200)  # frame index marker in one pixel
+    clip = m._make_clip(video, 10)
+    marker = clip[0, 0, :, 0, 0] * m.KINETICS_STD[0] + m.KINETICS_MEAN[0]
+    assert np.allclose(np.round(marker * 255), [10 + 2 * i for i in range(32)])
+
+
+def test_clip_starts_use_two_frame_period_span():
+    assert m.FRAME_PERIOD == 2
+    assert m._clip_starts(63) == [0]  # exactly one window spans 63 frames
+    assert m._clip_starts(100) == [0, 18, 37]  # same spacing as the evaluation protocol
+    starts = m._clip_starts(400)
+    assert starts == [0, 168, 337] and starts[-1] + 63 <= 400

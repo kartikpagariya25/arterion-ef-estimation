@@ -10,6 +10,7 @@ WEIGHTS_DIR = os.path.join(os.path.dirname(__file__), "weights")
 MODEL_PATH = os.path.join(WEIGHTS_DIR, "ef_model.onnx")
 
 CLIP_LENGTH = 32
+FRAME_PERIOD = 2  # every 2nd frame, as in training; one window spans (32-1)*2+1 = 63 frames
 FRAME_SIZE = 112
 MAX_CLIPS = 3
 KINETICS_MEAN = np.array([0.43216, 0.394666, 0.37645], dtype=np.float32)
@@ -66,16 +67,16 @@ def _read_video(video_bytes: bytes) -> np.ndarray:
 
 
 def _clip_starts(n_frames: int) -> list:
-    """Start indices of up to MAX_CLIPS contiguous windows spread across the video."""
-    if n_frames <= CLIP_LENGTH:
+    """Start indices of up to MAX_CLIPS windows spread across the video (same spacing as evaluation)."""
+    span = (CLIP_LENGTH - 1) * FRAME_PERIOD + 1
+    if n_frames <= span:
         return [0]
-    k = min(MAX_CLIPS, 1 + (n_frames - CLIP_LENGTH) // CLIP_LENGTH)
-    return sorted({int(round(s)) for s in np.linspace(0, n_frames - CLIP_LENGTH, k)})
+    return sorted({int(round(s)) for s in np.linspace(0, n_frames - span, MAX_CLIPS)})
 
 
 def _make_clip(video: np.ndarray, start: int) -> np.ndarray:
     n = video.shape[0]
-    idx = [min(start + i, n - 1) for i in range(CLIP_LENGTH)]  # loop-pad short videos with the last frame
+    idx = [min(start + i * FRAME_PERIOD, n - 1) for i in range(CLIP_LENGTH)]  # pad short videos with the last frame
     clip = (video[idx].astype(np.float32) / 255.0 - KINETICS_MEAN) / KINETICS_STD
     return clip.transpose(3, 0, 1, 2)[None, ...].astype(np.float32)
 
