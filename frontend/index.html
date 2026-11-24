@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arterion EF Console</title>
+<meta name="description" content="Estimate left-ventricular ejection fraction from an echocardiogram video. Research prototype.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232d4fd6'/%3E%3Cpath d='M6 20a10 10 0 0120 0' stroke='white' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3Cpath d='M16 20l5-7' stroke='white' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap top-in">
+    <a class="logo" href="#"><span class="mark"><svg viewBox="0 0 32 32" width="22" height="22"><path d="M6 21a10 10 0 0120 0" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M16 21l5-7" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg></span><b>Arterion</b><em>EF Console</em></a>
+    <div class="status" id="status" role="status"><i></i><span>Connecting…</span></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="intro">
+    <h1>Ejection fraction from a single echo clip</h1>
+    <p>Upload an apical four-chamber echocardiogram video. A 3D residual network estimates how much blood the left ventricle ejects per beat.</p>
+  </div>
+
+  <div class="grid">
+    <section class="card player" aria-label="Echocardiogram">
+      <div class="card-h"><h2>Study</h2><span class="chip" id="fileChip" hidden></span></div>
+      <div class="viewport" id="viewport">
+        <label class="drop" id="drop" for="file">
+          <svg viewBox="0 0 64 64" width="46" height="46" aria-hidden="true"><rect x="8" y="14" width="48" height="36" rx="6" fill="none" stroke="currentColor" stroke-width="3"/><path d="M27 24l12 8-12 8z" fill="currentColor"/></svg>
+          <strong>Drop an echo video here</strong>
+          <span>AVI or MP4 · apical four-chamber · or click to browse</span>
+          <input id="file" type="file" accept="video/*" hidden>
+        </label>
+        <video id="video" controls loop muted playsinline hidden></video>
+        <div class="nopreview" id="nopreview" hidden><b>Preview not available</b><span>This browser cannot play this video format (AVI is common for echo). The analysis still runs.</span></div>
+        <div class="busy" id="busy" hidden><div class="pulse"></div><b id="busyText">Analysing…</b></div>
+      </div>
+      <div class="notice" id="notice" hidden></div>
+      <div class="notice err" id="error" role="alert" hidden></div>
+      <div class="row"><button class="btn" id="reset" hidden>Analyse another video</button></div>
+    </section>
+
+    <aside class="card result" aria-live="polite">
+      <div class="card-h"><h2>Estimated EF</h2><span class="chip" id="classChip">Waiting for study</span></div>
+      <div class="gauge">
+        <svg viewBox="0 0 240 150" id="gaugeSvg" role="img" aria-label="Ejection fraction gauge">
+          <path class="band b-sev" d=""/><path class="band b-mod" d=""/><path class="band b-mild" d=""/><path class="band b-norm" d=""/>
+          <g id="needle" style="transform:rotate(-90deg);transform-origin:120px 124px"><path d="M120 124L120 44" stroke="var(--ink)" stroke-width="3" stroke-linecap="round"/><circle cx="120" cy="124" r="8" fill="var(--ink)"/></g>
+        </svg>
+        <div class="readout"><b id="ef">—</b><span>%</span></div>
+      </div>
+      <p class="summary" id="summary">Results appear here once a study is analysed.</p>
+      <div class="spread" id="spread" hidden>
+        <div class="spread-h"><span>Spread across clips</span><b id="spreadTxt"></b></div>
+        <div class="spread-bar"><i id="spreadFill"></i></div>
+        <small id="spreadNote"></small>
+      </div>
+      <dl class="facts" id="facts" hidden>
+        <div><dt>Frames</dt><dd id="fFrames">—</dd></div>
+        <div><dt>Clips scored</dt><dd id="fClips">—</dd></div>
+      </dl>
+    </aside>
+  </div>
+
+  <section class="bands" aria-label="How to read EF">
+    <div class="band-card norm"><b>≥ 55%</b><span>Normal</span></div>
+    <div class="band-card mild"><b>45–54%</b><span>Mildly reduced</span></div>
+    <div class="band-card mod"><b>30–44%</b><span>Moderately reduced</span></div>
+    <div class="band-card sev"><b>&lt; 30%</b><span>Severely reduced</span></div>
+  </section>
+
+  <section class="about">
+    <h2>About the model</h2>
+    <p>R(2+1)D-18 (Kinetics-pretrained) fine-tuned on EchoNet-Dynamic. For each video it scores up to three contiguous 32-frame windows and reports their mean; the spread shows how much the windows disagree. The video is resized to 112×112.</p>
+  </section>
+</main>
+
+<footer class="foot wrap">Research prototype — not a medical device. Do not use for diagnosis or treatment decisions. · <a href="https://github.com/kartikpagariya25/arterion-ef-estimation">Source on GitHub</a></footer>
+
+<script src="js/config.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
