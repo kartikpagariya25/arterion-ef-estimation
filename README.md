@@ -49,6 +49,13 @@ Tests: `cd backend && pytest tests`.
 
 `training/src`: `dataset.py` → `train.py` (MSE, AMP, early stopping on MAE) → `evaluate.py` → `export_onnx.py` (parity-checked) → `infer.py`.
 
+## Documentation
+
+- [Model card](MODEL_CARD.md): data, results and limitations
+- [Changelog](CHANGELOG.md)
+- [Contributing](CONTRIBUTING.md)
+- [Security and privacy](SECURITY.md)
+
 ## Data and licences
 
 Code: MIT. Trained on [EchoNet-Dynamic](https://echonet.github.io/dynamic/) (Ouyang et al., *Nature* 2020), released under the Stanford University Dataset Research Use Agreement — **non-commercial research use only**. The trained weights are published under the same research-use intent; do not use them commercially or clinically.
