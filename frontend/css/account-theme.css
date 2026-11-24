@@ -1,0 +1,12 @@
+:root {
+  --acc-font: 'DM Sans',system-ui,sans-serif; --acc-head: 'DM Sans',system-ui,sans-serif;
+  --acc-bg: #e9eff3; --acc-panel: #ffffff; --acc-panel2: #f3f6f9; --acc-field: #ffffff;
+  --acc-ink: #0f2230; --acc-dim: #5d7384; --acc-line: #d6e0e7;
+  --acc-accent: #2d4fd6; --acc-accent-ink: #ffffff;
+  --acc-danger: #d1343b; --acc-ok: #1f9d6b; --acc-warn: #c98600;
+  --acc-radius: 14px; --acc-border: 1px solid var(--acc-line); --acc-shadow: 0 12px 36px rgba(15,34,48,.16); --acc-card-shadow: 0 1px 2px rgba(15,34,48,.06);
+  --acc-head-weight: 700; --acc-head-style: normal; --acc-head-case: none; --acc-head-track: -.01em;
+  --acc-track: 0; --acc-case: none;
+  --acc-page-bg: #e9eff3; --acc-scrim: rgba(15,34,48,.45); --acc-glow: rgba(45,79,214,.2);
+  color-scheme: light;
+}
