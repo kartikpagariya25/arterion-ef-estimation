@@ -1,5 +1,7 @@
 # Arterion EF Console
 
+[![tests](https://github.com/kartikpagariya25/arterion-ef-estimation/actions/workflows/test.yml/badge.svg)](https://github.com/kartikpagariya25/arterion-ef-estimation/actions/workflows/test.yml) ![licence](https://img.shields.io/badge/licence-MIT-blue) ![python](https://img.shields.io/badge/python-3.11-blue)
+
 Estimates **left-ventricular ejection fraction (EF)** from an apical four-chamber echocardiogram video and shows it on a clinical gauge with the normal / mildly / moderately / severely reduced bands.
 
 ![Screenshot](docs/screenshot.jpg)
