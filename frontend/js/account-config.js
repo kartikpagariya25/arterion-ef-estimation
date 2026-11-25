@@ -3,6 +3,7 @@ window.ARTERION_APP = {
   slug: "ef-estimation",
   name: "Arterion EF Console",
   home: "index.html",
+  graphic: {type:"rings", colors:["#3a6df0","#f0a070"]},
   tasks: {
     "ef-estimation": "Ejection fraction"
   },
