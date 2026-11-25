@@ -88,7 +88,7 @@ def predict(file_url: str) -> dict:
         return {
             "ejection_fraction": 0.0,
             "classification": "unknown",
-            "summary": "EF estimation model weights not found — training not yet completed.",
+            "summary": "EF estimation model weights not found, so training has not been completed.",
             "clips_used": 0,
             "ef_range": [0.0, 0.0],
         }
@@ -100,7 +100,7 @@ def predict(file_url: str) -> dict:
     return {
         "ejection_fraction": ef,
         "classification": classification,
-        "summary": f"Estimated EF {ef:.1f}% — {classification.replace('_', ' ')}.",
+        "summary": f"Estimated EF {ef:.1f}%, {classification.replace('_', ' ')}.",
         "clips_used": len(efs),
         "ef_range": [round(min(efs), 1), round(max(efs), 1)],
         "frames": int(video.shape[0]),
