@@ -31,7 +31,7 @@
       if (!(await fetch(API + "/health", { cache: "no-store" })).ok) throw 0;
       el.className = "status ok"; el.lastElementChild.textContent = "API online";
     } catch {
-      el.className = "status bad"; el.lastElementChild.textContent = "API offline · " + API;
+      el.className = "status bad"; el.lastElementChild.textContent = "API offline at " + API;
     }
   })();
 
@@ -50,8 +50,8 @@
   function reset() {
     const v = $("video"); v.pause(); if (v.src) URL.revokeObjectURL(v.src); v.removeAttribute("src"); v.load();
     show(v, false); show($("nopreview"), false); show(drop, true); show($("reset"), false); show($("fileChip"), false); show($("notice"), false); setError("");
-    $("file").value = ""; $("ef").textContent = "—"; setNeedle(0);
-    $("classChip").textContent = "Waiting for study"; $("classChip").style.cssText = "";
+    $("file").value = ""; $("ef").textContent = "0"; setNeedle(0);
+    $("classChip").textContent = "Waiting for study"; $("classChip").removeAttribute("data-band");
     $("summary").textContent = "Results appear here once a study is analysed.";
     show($("spread"), false); show($("facts"), false);
     document.querySelectorAll(".band-card").forEach((c) => c.classList.remove("on"));
@@ -104,19 +104,19 @@
     const cls = BAND_CLASS[r.classification];
     const chip = $("classChip");
     chip.textContent = LABEL[r.classification];
-    chip.style.background = `var(--${cls})`; chip.style.color = "#fff";
+    chip.dataset.band = cls;
     $("summary").textContent = r.summary;
     document.querySelectorAll(".band-card").forEach((c) => c.classList.toggle("on", c.classList.contains(cls)));
 
     const [lo, hi] = r.ef_range;
     show($("spread"), true);
-    $("spreadTxt").textContent = r.clips_used > 1 ? `${lo.toFixed(1)} – ${hi.toFixed(1)} %` : "single clip";
+    $("spreadTxt").textContent = r.clips_used > 1 ? `${lo.toFixed(1)} to ${hi.toFixed(1)}%` : "single window";
     const f = $("spreadFill"); f.style.left = (lo / MAX) * 100 + "%"; f.style.width = Math.max(((hi - lo) / MAX) * 100, 1.5) + "%";
     const width = hi - lo;
-    $("spreadNote").textContent = r.clips_used <= 1 ? "Video too short for several windows; one clip was scored."
-      : width > 10 ? "The windows disagree noticeably — image quality or motion may be limiting the estimate."
+    $("spreadNote").textContent = r.clips_used <= 1 ? "Video too short for several windows; one window was scored."
+      : width > 10 ? "The windows disagree noticeably, so image quality or motion may be limiting the estimate."
       : "The scored windows agree closely.";
-    show($("facts"), true); $("fFrames").textContent = r.frames ?? "—"; $("fClips").textContent = r.clips_used;
+    show($("facts"), true); $("fFrames").textContent = r.frames ?? "n/a"; $("fClips").textContent = r.clips_used;
   }
   setNeedle(0);
 })();
