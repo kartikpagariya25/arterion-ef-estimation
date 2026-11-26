@@ -125,6 +125,15 @@
       <p>We report test-set numbers, the exact protocol and what still falls short, so you can judge the model for yourself.</p>
       <ul><li><i class="ph-bold ph-check-circle" aria-hidden="true"></i><span>Held-out test split, never trained on</span></li><li><i class="ph-bold ph-check-circle" aria-hidden="true"></i><span>Same protocol as the app: every second frame, three windows</span></li><li><i class="ph-bold ph-check-circle" aria-hidden="true"></i><span>The R-squared target of 0.75 is not yet met, and we say so</span></li><li><i class="ph-bold ph-check-circle" aria-hidden="true"></i><span>Weights and metrics are versioned together</span></li></ul>
     </div>
+    <div class="lp-panel">
+      <div class="lp-panel-h"><span>Held-out test results</span><span>EchoNet-Dynamic, 1,277 videos</span></div>
+      <div class="lp-bars">
+        <div class="lp-bar"><span>R-squared, v1.1.0</span><span class="t"><span class="f" style="--v:0.739"></span></span><span class="n" data-count="0.739" data-dec="3">0.739</span></div>
+        <div class="lp-bar"><span>R-squared, v1.0.0</span><span class="t"><span class="f" style="--v:0.676"></span></span><span class="n" data-count="0.676" data-dec="3">0.676</span></div>
+        <div class="lp-bar"><span>Project target</span><span class="t"><span class="f" style="--v:0.75"></span></span><span class="n" data-count="0.75" data-dec="3">0.750</span></div>
+      </div>
+      <div class="lp-legend"><span><i class=""></i>MAE 4.61 EF points, RMSE 6.25</span><span><i class=""></i>Every 2nd frame, mean of 3 windows</span></div>
+    </div>
   </div>
 </section>
 <script src="js/config.js"></script>
