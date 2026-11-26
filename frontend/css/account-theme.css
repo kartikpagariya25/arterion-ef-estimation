@@ -11,4 +11,14 @@
   color-scheme: light;
 }
 .lp-body .acc-page { padding-top: 118px; }
-.lp-body .acc-card { background: #fff; }
+.lp-body .acc-card { background: var(--card); }
+html[data-theme="dark"] {
+  --acc-bg: #0a1020; --acc-panel: #111b34; --acc-panel2: #0e1730; --acc-field: #0a1020;
+  --acc-ink: #e6edf8; --acc-dim: #93a4bd; --acc-line: #22314f;
+  --acc-border: 1px solid #22314f; --acc-shadow: 0 24px 50px -24px rgba(0, 0, 0, .85); --acc-card-shadow: 0 22px 44px -34px rgba(0, 0, 0, .8);
+  --acc-scrim: rgba(0, 0, 0, .62); --acc-danger: #f87171; --acc-ok: #4ade80; --acc-warn: #fbbf24;
+  color-scheme: dark;
+}
+body.acc-body.lp-body { background: var(--bg); }
+html[data-theme="dark"] .acc-badge.wait { color: #fbbf24; }
+html[data-theme="dark"] .acc-note { background: var(--acc-panel2); }
