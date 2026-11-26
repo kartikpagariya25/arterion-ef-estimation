@@ -66,6 +66,57 @@
     </div>
   </div>
 </section>
+<section class="lp-section lp-soft" id="analyze">
+  <div class="lp-wrap"><div class="lp-head"><span class="lp-pill"><i class="ph-bold ph-flask" aria-hidden="true"></i>Live Tool</span><h2 class="lp-h2">Run an Analysis</h2><p class="lp-sub">Drop in a video and watch the gauge settle.</p></div></div>
+  <div class="lp-tool">
+    <div class="tool-grid">
+        <section class="card spot player rise" style="--i:3" aria-label="Echocardiogram">
+          <div class="card-h"><h2>Your study</h2><span class="chip" id="fileChip" hidden></span></div>
+          <div class="viewport" id="viewport">
+            <label class="drop" id="drop" for="file">
+              <span class="orb"><i class="ph-bold ph-film-strip" aria-hidden="true"></i></span>
+              <strong>Drop an echo video here</strong>
+              <span class="hint">AVI or MP4, apical four-chamber, or click to browse</span>
+              <input id="file" type="file" accept="video/*" hidden>
+            </label>
+            <video id="video" controls loop muted playsinline hidden></video>
+            <div class="nopreview" id="nopreview" hidden><b>Preview not available</b><span>This browser cannot play this video format (AVI is common for echo). The analysis still runs.</span></div>
+            <div class="busy" id="busy" hidden><div class="pulse"><i></i><i></i></div><b id="busyText">Analysing</b><div class="bar"><i></i></div></div>
+          </div>
+          <div class="notice" id="notice" hidden></div>
+          <div class="notice err" id="error" role="alert" hidden></div>
+          <div class="row"><button class="btn press" id="reset" hidden><i class="ph-bold ph-arrow-counter-clockwise" aria-hidden="true"></i>Analyse another video</button></div>
+        </section>
+
+        <aside class="card spot result rise" style="--i:4" aria-live="polite">
+          <div class="card-h"><h2>Estimated EF</h2><span class="chip" id="classChip">Waiting for study</span></div>
+          <div class="gauge">
+            <svg viewBox="0 0 240 150" id="gaugeSvg" role="img" aria-label="Ejection fraction gauge">
+              <path class="band b-sev" pathLength="1" d=""/><path class="band b-mod" pathLength="1" d=""/><path class="band b-mild" pathLength="1" d=""/><path class="band b-norm" pathLength="1" d=""/>
+              <g id="needle" style="transform:rotate(-90deg);transform-origin:120px 124px"><path d="M120 124L120 46" stroke="var(--ink)" stroke-width="3.5" stroke-linecap="round"/><circle cx="120" cy="124" r="9" fill="var(--ink)"/><circle cx="120" cy="124" r="3.5" fill="var(--solid)"/></g>
+            </svg>
+            <div class="readout"><b id="ef">0</b><span>%</span></div>
+          </div>
+          <p class="summary" id="summary">Results appear here once a study is analysed.</p>
+          <div class="spread" id="spread" hidden>
+            <div class="spread-h"><span>Spread across windows</span><b id="spreadTxt"></b></div>
+            <div class="spread-bar"><i id="spreadFill"></i></div>
+            <small id="spreadNote"></small>
+          </div>
+          <dl class="facts" id="facts" hidden>
+            <div><dt>Frames read</dt><dd id="fFrames">0</dd></div>
+            <div><dt>Windows scored</dt><dd id="fClips">0</dd></div>
+          </dl>
+        </aside>
+    </div>
+      <section class="bands" aria-label="How to read EF">
+        <div class="band-card norm" data-reveal style="--d:0"><b>55% and above</b><span>Normal</span></div>
+        <div class="band-card mild" data-reveal style="--d:1"><b>45 to 54%</b><span>Mildly reduced</span></div>
+        <div class="band-card mod" data-reveal style="--d:2"><b>30 to 44%</b><span>Moderately reduced</span></div>
+        <div class="band-card sev" data-reveal style="--d:3"><b>Below 30%</b><span>Severely reduced</span></div>
+      </section>
+  </div>
+</section>
 <script src="js/config.js"></script>
 <script src="js/account-config.js"></script>
 <script src="js/auth.js"></script>
