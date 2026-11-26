@@ -24,17 +24,19 @@
 <script>if(!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches))document.documentElement.classList.add('lp-anim')</script>
 </head>
 <body>
+<a class="skip" href="#analyze">Skip to the tool</a>
 <noscript><p style="padding:1rem;font:16px sans-serif">This page needs JavaScript to upload a file and show the result.</p></noscript>
 <div class="lp-progress" aria-hidden="true"></div>
 <header class="lp-nav">
   <div class="lp-nav-in">
     <a class="lp-brand" href="#top" aria-label="Arterion EF Console"><span class="lp-logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 17.5a8 8 0 0 1 16 0" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round"/><path d="M12 17.5l4.2-6" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><circle cx="12" cy="17.5" r="2" fill="#fff"/></svg></span><b>Arterion<span>EF</span></b></a>
-    <nav class="lp-pills"><a class="on" href="#top">Home</a><a href="#analyze">Analyze</a><a href="#how">How it works</a><a href="#evidence">Evidence</a></nav>
+    <nav class="lp-pills" aria-label="Primary"><a class="on" href="#top">Home</a><a href="#analyze">Analyze</a><a href="#how">How it works</a><a href="#evidence">Evidence</a></nav>
     <div class="lp-actions"><div class="status" id="status" role="status"><i></i><span>Connecting</span></div><div id="acc-slot"></div><a class="lp-btn lp-btn-primary lp-btn-sm" href="#analyze">Get Started</a></div>
     <button class="lp-burger" aria-label="Menu" aria-expanded="false" aria-controls="lp-menu"><i class="ph-bold ph-list" aria-hidden="true"></i></button>
   </div>
   <div class="lp-menu" id="lp-menu"><a href="#top">Home</a><a href="#analyze">Analyze</a><a href="#how">How it works</a><a href="#evidence">Evidence</a><a href="history.html">History</a><button class="acc-signin" data-acc-open>Sign In</button><a class="lp-btn lp-btn-primary" href="#analyze">Get Started</a></div>
 </header>
+<main id="main">
 <section class="lp-hero" id="top">
   <svg class="lp-motif" viewBox="0 0 1440 150" preserveAspectRatio="none" aria-hidden="true"><path d="M0 74.8 L6 72.4 L12 70.1 L18 67.9 L24 65.8 L30 63.9 L36 62.1 L42 60.4 L48 58.9 L54 57.6 L60 56.4 L66 55.3 L72 54.4 L78 53.7 L84 53.1 L90 52.7 L96 52.4 L102 52.3 L108 52.3 L114 52.4 L120 52.6 L126 52.9 L132 53.3 L138 53.8 L144 54.4 L150 55.0 L156 55.7 L162 56.4 L168 57.2 L174 58.0 L180 58.7 L186 59.5 L192 60.3 L198 61.1 L204 61.8 L210 62.5 L216 63.2 L222 63.9 L228 64.5 L234 65.1 L240 65.6 L246 66.1 L252 66.6 L258 67.0 L264 67.4 L270 67.8 L276 68.1 L282 68.4 L288 68.7 L294 69.1 L300 69.4 L306 69.7 L312 70.1 L318 70.5 L324 70.9 L330 71.4 L336 71.9 L342 72.5 L348 73.2 L354 73.9 L360 74.8 L366 75.7 L372 76.7 L378 77.7 L384 78.9 L390 80.2 L396 81.5 L402 83.0 L408 84.5 L414 86.2 L420 87.9 L426 89.6 L432 91.5 L438 93.4 L444 95.3 L450 97.2 L456 99.2 L462 101.2 L468 103.2 L474 105.2 L480 107.1 L486 109.0 L492 110.9 L498 112.6 L504 114.3 L510 115.9 L516 117.3 L522 118.7 L528 119.8 L534 120.9 L540 121.7 L546 122.4 L552 123.0 L558 123.3 L564 123.4 L570 123.4 L576 123.1 L582 122.7 L588 122.1 L594 121.2 L600 120.2 L606 118.9 L612 117.5 L618 116.0 L624 114.2 L630 112.3 L636 110.3 L642 108.1 L648 105.8 L654 103.4 L660 100.9 L666 98.3 L672 95.7 L678 93.1 L684 90.4 L690 87.7 L696 85.0 L702 82.4 L708 79.8 L714 77.2 L720 74.8 L726 72.4 L732 70.1 L738 67.9 L744 65.8 L750 63.9 L756 62.1 L762 60.4 L768 58.9 L774 57.6 L780 56.4 L786 55.3 L792 54.4 L798 53.7 L804 53.1 L810 52.7 L816 52.4 L822 52.3 L828 52.3 L834 52.4 L840 52.6 L846 52.9 L852 53.3 L858 53.8 L864 54.4 L870 55.0 L876 55.7 L882 56.4 L888 57.2 L894 58.0 L900 58.7 L906 59.5 L912 60.3 L918 61.1 L924 61.8 L930 62.5 L936 63.2 L942 63.9 L948 64.5 L954 65.1 L960 65.6 L966 66.1 L972 66.6 L978 67.0 L984 67.4 L990 67.8 L996 68.1 L1002 68.4 L1008 68.7 L1014 69.1 L1020 69.4 L1026 69.7 L1032 70.1 L1038 70.5 L1044 70.9 L1050 71.4 L1056 71.9 L1062 72.5 L1068 73.2 L1074 73.9 L1080 74.8 L1086 75.7 L1092 76.7 L1098 77.7 L1104 78.9 L1110 80.2 L1116 81.5 L1122 83.0 L1128 84.5 L1134 86.2 L1140 87.9 L1146 89.6 L1152 91.5 L1158 93.4 L1164 95.3 L1170 97.2 L1176 99.2 L1182 101.2 L1188 103.2 L1194 105.2 L1200 107.1 L1206 109.0 L1212 110.9 L1218 112.6 L1224 114.3 L1230 115.9 L1236 117.3 L1242 118.7 L1248 119.8 L1254 120.9 L1260 121.7 L1266 122.4 L1272 123.0 L1278 123.3 L1284 123.4 L1290 123.4 L1296 123.1 L1302 122.7 L1308 122.1 L1314 121.2 L1320 120.2 L1326 118.9 L1332 117.5 L1338 116.0 L1344 114.2 L1350 112.3 L1356 110.3 L1362 108.1 L1368 105.8 L1374 103.4 L1380 100.9 L1386 98.3 L1392 95.7 L1398 93.1 L1404 90.4 L1410 87.7 L1416 85.0 L1422 82.4 L1428 79.8 L1434 77.2 L1440 74.8"/></svg>
   <div class="lp-wrap lp-hero-in">
@@ -150,6 +152,7 @@
     <div class="lp-cta"><a class="lp-btn lp-btn-primary" href="#analyze">Analyze an Echo<i class="ph-bold ph-arrow-right" aria-hidden="true"></i></a><a class="lp-btn lp-btn-ghost" href="https://github.com/kartikpagariya25/arterion-ef-estimation"><i class="ph-bold ph-github-logo" aria-hidden="true"></i>Read the Source</a></div>
   </div>
 </section>
+</main>
 <footer class="lp-foot">
   <div class="lp-wrap">
     <div class="lp-foot-in">
