@@ -4,97 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Arterion EF Console</title>
-<meta name="description" content="Estimate left-ventricular ejection fraction from an echocardiogram video. Research prototype.">
-<meta name="theme-color" content="#e8f0f8">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Arterion EF Console">
-<meta property="og:description" content="Left-ventricular ejection fraction (EF) estimation from an apical four-chamber echocardiogram video. Research prototype.">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="manifest" href="site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&family=Poppins:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/bold/style.css">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='10' fill='%233a6df0'/%3E%3Cpath d='M6 20a10 10 0 0120 0' stroke='white' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3Cpath d='M16 20l5-7' stroke='white' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="css/fx.css">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/landing.css">
 <link rel="stylesheet" href="css/app.css">
 <link rel="stylesheet" href="css/account-theme.css">
 <link rel="stylesheet" href="css/account.css">
 </head>
 <body>
 <noscript><p style="padding:1rem;font:16px sans-serif">This page needs JavaScript to upload a file and show the result.</p></noscript>
-
-<header class="top rise" style="--i:0">
-  <div class="top-in">
-    <a class="logo" href="#"><span class="mark"><i class="ph-bold ph-heartbeat" aria-hidden="true"></i></span><b>Arterion</b><em>EF Console</em></a>
-    <div class="status" id="status" role="status"><i></i><span>Connecting</span></div>
-  </div>
-</header>
-
-<main class="wrap">
-  <div class="stage">
-    <div class="intro">
-      <h1 class="rise" style="--i:1">Ejection fraction from a single echo clip</h1>
-      <p class="rise" style="--i:2">Upload an apical four-chamber video and get an EF estimate with a stability range across the heartbeat.</p>
-    </div>
-
-    <section class="card spot player rise" style="--i:3" aria-label="Echocardiogram">
-      <div class="card-h"><h2>Your study</h2><span class="chip" id="fileChip" hidden></span></div>
-      <div class="viewport" id="viewport">
-        <label class="drop" id="drop" for="file">
-          <span class="orb"><i class="ph-bold ph-film-strip" aria-hidden="true"></i></span>
-          <strong>Drop an echo video here</strong>
-          <span class="hint">AVI or MP4, apical four-chamber, or click to browse</span>
-          <input id="file" type="file" accept="video/*" hidden>
-        </label>
-        <video id="video" controls loop muted playsinline hidden></video>
-        <div class="nopreview" id="nopreview" hidden><b>Preview not available</b><span>This browser cannot play this video format (AVI is common for echo). The analysis still runs.</span></div>
-        <div class="busy" id="busy" hidden><div class="pulse"><i></i><i></i></div><b id="busyText">Analysing</b><div class="bar"><i></i></div></div>
-      </div>
-      <div class="notice" id="notice" hidden></div>
-      <div class="notice err" id="error" role="alert" hidden></div>
-      <div class="row"><button class="btn press" id="reset" hidden><i class="ph-bold ph-arrow-counter-clockwise" aria-hidden="true"></i>Analyse another video</button></div>
-    </section>
-
-    <aside class="card spot result rise" style="--i:4" aria-live="polite">
-      <div class="card-h"><h2>Estimated EF</h2><span class="chip" id="classChip">Waiting for study</span></div>
-      <div class="gauge">
-        <svg viewBox="0 0 240 150" id="gaugeSvg" role="img" aria-label="Ejection fraction gauge">
-          <path class="band b-sev" pathLength="1" d=""/><path class="band b-mod" pathLength="1" d=""/><path class="band b-mild" pathLength="1" d=""/><path class="band b-norm" pathLength="1" d=""/>
-          <g id="needle" style="transform:rotate(-90deg);transform-origin:120px 124px"><path d="M120 124L120 46" stroke="var(--ink)" stroke-width="3.5" stroke-linecap="round"/><circle cx="120" cy="124" r="9" fill="var(--ink)"/><circle cx="120" cy="124" r="3.5" fill="var(--solid)"/></g>
-        </svg>
-        <div class="readout"><b id="ef">0</b><span>%</span></div>
-      </div>
-      <p class="summary" id="summary">Results appear here once a study is analysed.</p>
-      <div class="spread" id="spread" hidden>
-        <div class="spread-h"><span>Spread across windows</span><b id="spreadTxt"></b></div>
-        <div class="spread-bar"><i id="spreadFill"></i></div>
-        <small id="spreadNote"></small>
-      </div>
-      <dl class="facts" id="facts" hidden>
-        <div><dt>Frames read</dt><dd id="fFrames">0</dd></div>
-        <div><dt>Windows scored</dt><dd id="fClips">0</dd></div>
-      </dl>
-    </aside>
-  </div>
-
-  <section class="bands" aria-label="How to read EF">
-    <div class="band-card norm" data-reveal style="--d:0"><b>55% and above</b><span>Normal</span></div>
-    <div class="band-card mild" data-reveal style="--d:1"><b>45 to 54%</b><span>Mildly reduced</span></div>
-    <div class="band-card mod" data-reveal style="--d:2"><b>30 to 44%</b><span>Moderately reduced</span></div>
-    <div class="band-card sev" data-reveal style="--d:3"><b>Below 30%</b><span>Severely reduced</span></div>
-  </section>
-
-  <section class="about" data-reveal>
-    <h2>How the estimate is made</h2>
-    <p>An R(2+1)D-18 video network, fine-tuned on EchoNet-Dynamic, scores up to three 32-frame windows (every second frame, about one heartbeat each) and reports their mean. The spread shows how much the windows disagree.</p>
-  </section>
-</main>
-
-<footer class="foot wrap">Research prototype, not a medical device. Do not use for diagnosis or treatment decisions. <a href="https://github.com/kartikpagariya25/arterion-ef-estimation">Source on GitHub</a></footer>
-
 <script src="js/config.js"></script>
 <script src="js/account-config.js"></script>
 <script src="js/auth.js"></script>
-<script src="js/fx.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>
