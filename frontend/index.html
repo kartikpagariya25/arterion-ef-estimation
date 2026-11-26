@@ -70,7 +70,7 @@
   <div class="lp-wrap"><div class="lp-head"><span class="lp-pill"><i class="ph-bold ph-flask" aria-hidden="true"></i>Live Tool</span><h2 class="lp-h2">Run an Analysis</h2><p class="lp-sub">Drop in a video and watch the gauge settle.</p></div></div>
   <div class="lp-tool">
     <div class="tool-grid">
-        <section class="card spot player rise" style="--i:3" aria-label="Echocardiogram">
+        <section class="card player" aria-label="Echocardiogram">
           <div class="card-h"><h2>Your study</h2><span class="chip" id="fileChip" hidden></span></div>
           <div class="viewport" id="viewport">
             <label class="drop" id="drop" for="file">
@@ -88,7 +88,7 @@
           <div class="row"><button class="btn press" id="reset" hidden><i class="ph-bold ph-arrow-counter-clockwise" aria-hidden="true"></i>Analyse another video</button></div>
         </section>
 
-        <aside class="card spot result rise" style="--i:4" aria-live="polite">
+        <aside class="card result" aria-live="polite">
           <div class="card-h"><h2>Estimated EF</h2><span class="chip" id="classChip">Waiting for study</span></div>
           <div class="gauge">
             <svg viewBox="0 0 240 150" id="gaugeSvg" role="img" aria-label="Ejection fraction gauge">
@@ -110,10 +110,10 @@
         </aside>
     </div>
       <section class="bands" aria-label="How to read EF">
-        <div class="band-card norm" data-reveal style="--d:0"><b>55% and above</b><span>Normal</span></div>
-        <div class="band-card mild" data-reveal style="--d:1"><b>45 to 54%</b><span>Mildly reduced</span></div>
-        <div class="band-card mod" data-reveal style="--d:2"><b>30 to 44%</b><span>Moderately reduced</span></div>
-        <div class="band-card sev" data-reveal style="--d:3"><b>Below 30%</b><span>Severely reduced</span></div>
+        <div class="band-card norm"><b>55% and above</b><span>Normal</span></div>
+        <div class="band-card mild"><b>45 to 54%</b><span>Mildly reduced</span></div>
+        <div class="band-card mod"><b>30 to 44%</b><span>Moderately reduced</span></div>
+        <div class="band-card sev"><b>Below 30%</b><span>Severely reduced</span></div>
       </section>
   </div>
 </section>
