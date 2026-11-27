@@ -44,5 +44,5 @@ def task_request(monkeypatch):
     def make_body(url):
         return {"file_url": url}
 
-    return SimpleNamespace(url="/ef-estimation/predict", task="ef-estimation", key="ejection_fraction",
+    return SimpleNamespace(url="/ef-estimation/predict", task="ef-estimation", key="ejection_fraction", metric_value=60.0,
                            make_body=make_body, body=make_body("http://testserver/static_uploads/abc123.avi"))
