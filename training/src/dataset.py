@@ -84,6 +84,4 @@ class EFDataset(Dataset):
     def __getitem__(self, idx):
         video, ef = self.load_video(idx)
         clip = to_tensor(_sample_clip(video, CLIP_LENGTH, self.train, self.period))
-        row = self.df.iloc[idx]
-
         return torch.from_numpy(clip).float(), torch.tensor(ef, dtype=torch.float32)

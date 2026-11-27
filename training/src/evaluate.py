@@ -3,7 +3,6 @@ import json
 from datetime import datetime, timezone
 import numpy as np
 import torch
-from torch.utils.data import DataLoader
 
 from config import ARTIFACTS_DIR
 from dataset import EFDataset, CLIP_LENGTH, _clip_at, _sample_clip, to_tensor, window_starts
