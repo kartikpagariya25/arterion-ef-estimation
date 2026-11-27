@@ -4,12 +4,15 @@ from fastapi.staticfiles import StaticFiles
 
 from .accounts import db as accounts_db
 from .accounts.router import router as accounts_router
+from . import ops
 from .common import UPLOAD_DIR, InvalidInput, invalid_input_handler, router as uploads_router
 from .ef_estimation.router import router as task_router
 
 app = FastAPI(title="arterion-ef-estimation")
-app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"],
-                   expose_headers=["X-History-Id"])
+app.add_middleware(CORSMiddleware, allow_origins=ops.cors_origins(), allow_methods=["*"], allow_headers=["*"],
+                   expose_headers=["X-History-Id", "X-Request-Id"])
+ops.install(app)
+ops.start_purge_thread(UPLOAD_DIR)
 app.add_exception_handler(InvalidInput, invalid_input_handler)
 accounts_db.init_db()
 app.include_router(accounts_router)
