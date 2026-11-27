@@ -6,8 +6,10 @@ Thanks for looking at Arterion EF Console. This is a research prototype, so smal
 ```bash
 cd backend
 pip install -r requirements-dev.txt     # Python 3.11
-pytest tests -q                         # 34 tests, no weights needed
+pytest tests -q                         # 53 tests, no weights needed
 ```
+Before you push, `make lint` runs ruff and a syntax check of the frontend scripts, the same as CI.
+
 The tests use stand-in ONNX sessions, so they run without the trained weights. To try the real model, run `scripts/fetch_weights.sh` (or `.ps1`) first.
 
 ## Guidelines
